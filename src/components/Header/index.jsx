@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import LoginIcon from '@mui/icons-material/Login';
+import { Login, AccountBox }from '@mui/icons-material';
 import { IconButton } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -15,6 +15,8 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 function Header() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     return(
         <Box sx={12}>
             <Paper elevation={2}>
@@ -23,14 +25,21 @@ function Header() {
                         <p>Title of App</p>
                     </Grid>
                     <Grid xs={4}>
-                        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+                        <TextField id="standard-basic" label="Search" variant="standard" fullWidth/>
                     </Grid>
-                    <Grid xs={4} container alignItems="flex-end" >
+                    {isLoggedIn ?
+                    <Grid xs={4} container alignItems="flex-end" justifyContent="flex-end">
                         <IconButton aria-label="login">
-                            <LoginIcon />
+                            <AccountBox />
                         </IconButton>
                     </Grid>
-
+                    :
+                    <Grid xs={4} container alignItems="flex-end" justifyContent="flex-end">
+                        <IconButton aria-label="logout">
+                            <Login />
+                        </IconButton>
+                    </Grid>
+                    }
                 </Grid>
             </Paper>
         </Box>
